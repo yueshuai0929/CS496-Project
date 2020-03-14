@@ -1,11 +1,14 @@
-# Problem<br>
+# Problem
 The problem comes from the current vqa applications for visually impaired people. We want to implement a system in which users can upload a picture of the environment or a specific item and ask a question about it. The system is able to generate an answer and read out. Thus, basically our project can be divided into two parts: Visual Question Answering (VQA) and Vocie Cloning. 
-<br><br>
-# Solution<br>
-We use [Pythia](https://github.com/facebookresearch/pythia) as our model to complete the VQA task. <br>
-Pythia is a modular framework for Visual Question Answering research, which formed the basis for the winning entry to the VQA Challenge 2018 from Facebook AI Research (FAIR)s A-STAR team. It is built on top of PyTorch.<br><br>
-For Voice Cloning task, we use [Real-Time Voice Cloning](https://github.com/CorentinJ/Real-Time-Voice-Cloning) to read out the answer<br>
-The model is an implementation of [Transfer Learning from Speaker Verification to Multispeaker Text-To-Speech Synthesis](https://arxiv.org/pdf/1806.04558.pdf) (SV2TTS) with a vocoder that works in real-time.<br>
+
+
+# Solution
+We use [Pythia](https://github.com/facebookresearch/pythia) as our model to complete the VQA task. 
+Pythia is a modular framework for Visual Question Answering research, which formed the basis for the winning entry to the VQA Challenge 2018 from Facebook AI Research (FAIR)s A-STAR team. It is built on top of PyTorch.
+
+For Voice Cloning task, we use [Real-Time Voice Cloning](https://github.com/CorentinJ/Real-Time-Voice-Cloning) to read out the answer. 
+The model is an implementation of [Transfer Learning from Speaker Verification to Multispeaker Text-To-Speech Synthesis](https://arxiv.org/pdf/1806.04558.pdf) (SV2TTS) with a vocoder that works in real-time.
+
 
 # Quickstart for VQA  
 ## Installation  
@@ -26,18 +29,26 @@ pip install torchvision
 pip install tensorboardX
 
 ```
+
+
 ### 2. Clone Pythia repository  
 ```
 git clone https://github.com/facebookresearch/pythia ~/pythia
 ```
+
+
 ### 3. Install dependencies and setup
 ```
 cd ~/pythia
 python setup.py develop
 ```
+
+
 ## Download Data  
-Datasets currently supported in Pythia require two parts of data, features and ImDB. Features correspond to pre-extracted object features from an object detector. ImDB is the image database for the datasets which contains information such as questions and answers.  
+Datasets currently supported in Pythia require two parts of data, features and ImDB. Features correspond to pre-extracted object features from an object detector. ImDB is the image database for the datasets which contains information such as questions and answers. 
+
 For VQA task, we need to download features from COCO dataset and VQA 2.0 ImDB. We assume that all of the data is kept inside `data` folder under `pythia` root folder. If you want to use your own dataset, the dataset should be in `data` folder. This step may take some time. 
+
 ```
 cd ~/pythia;
 # Create data folder
@@ -60,7 +71,9 @@ mkdir -p imdb && cd imdb
 wget https://dl.fbaipublicfiles.com/pythia/data/imdb/vqa.tar.gz
 tar xf vqa.tar.gz
 ```  
+
 Here vqa2 stands for the dataset VQA2.0. If you want to use other datasets like TextVQA or VizWiz. You can change it into the corresponding key words. Here is all the datasets that Pythia currently support for VQA task:  
+
 |Dataset|Task|Key|ImDB link|Features Link|
 |:---|:---|:---|:---|:---|
 |VQA2.0|vqa|vqa2|[VQA 2.0 ImDB](https://dl.fbaipublicfiles.com/pythia/data/imdb/vqa.tar.gz)|[COCO](https://dl.fbaipublicfiles.com/pythia/features/coco.tar.gz)|
@@ -68,6 +81,8 @@ Here vqa2 stands for the dataset VQA2.0. If you want to use other datasets like 
 |TextVQA|vqa|textvqa|[TextVQA 0.5 ImDB](https://dl.fbaipublicfiles.com/pythia/data/imdb/textvqa_0.5.tar.gz)|[Openimages](https://dl.fbaipublicfiles.com/pythia/features/open_images.tar.gz)|
 |VisualGenome|vqa|visual_genome|Automatically downloaded|Automatically downloaded|
 |CLEVR|vqa|clevr|Automatically downloaded|Automatically downloaded|
+
+
 ## Training
 After downloading and unzipping the data, we can start training the model
 ```
@@ -75,6 +90,8 @@ cd ~/pythia;
 python tools/run.py --tasks vqa --datasets vqa2 --model pythia --config \
 configs/vqa/vqa2/pythia.yml
 ```  
+
+
 ## Pretrain models
 Performing inference using pretrained models in Pythia is easy. This section expects that you have already installed the required data as explained before.  
 Here is the links to the pretrain models:  
@@ -82,8 +99,8 @@ Here is the links to the pretrain models:
 [vqa2_train_only](https://dl.fbaipublicfiles.com/pythia/pretrained_models/vqa2/pythia.pth)  
 [vizwiz](https://dl.fbaipublicfiles.com/pythia/pretrained_models/vizwiz/pythia_pretrained_vqa2.pth) 
 
+We are using vqa2_train_val pretrained model. You can download it [here](https://dl.fbaipublicfiles.com/pythia/pretrained_models/vqa2/pythia_train_val.pth). Now to run inference for EvalAI, run the following command. 
 
-We are using vqa2_train_val pretrained model. You can download it [here](https://dl.fbaipublicfiles.com/pythia/pretrained_models/vqa2/pythia_train_val.pth). Now to run inference for EvalAI, run the following command.  
 ```
 cd ~/pythia/data
 mkdir -p models && cd models;
@@ -92,14 +109,13 @@ wget https://dl.fbaipublicfiles.com/pythia/pretrained_models/vqa2/pythia_train_v
 cd ../..;
 python tools/run.py --tasks vqa --datasets vqa2 --model pythia --config configs/vqa/vqa2/pythia_train_and_val.yml  --run_type inference --evalai_inference 1 --resume_file data/models/pythia_train_val.pth
 ```
-If you want to train or evaluate on val, change the `run_type` to `train` or `val`
-accordingly. You can also use multiple run types, for e.g. to do training, inference on
-val as well as test you can set `--run_type` to `train+val+inference`.
 
-if you remove `--evalai_inference` argument, Pythia will perform inference and provide results directly on the dataset. Do note that this is not possible in case of test sets as we don't have answers/targets for them. So, this can be useful for performing inference
-on val set locally.
+If you want to train or evaluate on val, change the `run_type` to `train` or `val` accordingly. You can also use multiple run types, for e.g. to do training, inference on val as well as test you can set `--run_type` to `train+val+inference`.
+
+if you remove `--evalai_inference` argument, Pythia will perform inference and provide results directly on the dataset. Do note that this is not possible in case of test sets as we don't have answers/targets for them. So, this can be useful for performing inference on val set locally.
 
 After the evaluation, you could found the prediction report results like this in the folder `/pythia/save/vqa_vqa2_pythia/reports`. 
+
 ```
 [{"question_id": 169624000, "answer": "yes"},
  {"question_id": 93006000, "answer": "car"},
@@ -118,6 +134,8 @@ After the evaluation, you could found the prediction report results like this in
  {"question_id": 364999018, "answer": "playing frisbee"},
  {"question_id": 557744002, "answer": "no"}]
 ```
+
+
 # Demo for VQA
 To quickly tryout a model interactively with [nvidia-docker](https://github.com/NVIDIA/nvidia-docker)
 1. Download our pythia repository.
@@ -125,19 +143,19 @@ To quickly tryout a model interactively with [nvidia-docker](https://github.com/
 ```bash
 docker pull shuaiyue0929/pythia
 ```
+
 3. Run the docker `pythia:latest` to open a jupyter notebook with a demo model to which you can ask questions interactively.
 ```bash
 nvidia-docker build pythia -t pythia:latest
 docker run --gpus 0 -it -p 8888:8888 pythia:latest
 ```
 The demo on jupyter notebook will look like this:<br>
-<br>
 
 ![image](https://github.com/yueshuai0929/CS496-Project/blob/master/2.png)<br>
 
 
+
 And you will get the answers in an order based on the confidence of the prediction.<br>
-<br>
 
 ![image](https://github.com/yueshuai0929/CS496-Project/blob/master/1.png)<br><br>
 
@@ -215,6 +233,9 @@ RUN echo 'export LD_LIBRARY_PATH=\"$LD_LIBRARY_PATH:/usr/local/cuda/lib64:/usr/l
 # Create jupyter notebook entrypoint
 CMD ["jupyter", "notebook", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--allow-root"]
 ```
+
+
+
 
 
 # Quickstart for Voice Cloning   
