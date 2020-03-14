@@ -151,11 +151,14 @@ docker run --gpus 0 -it -p 8888:8888 pythia:latest
 ```
 The demo on jupyter notebook will look like this:<br>
    3.1 Enter the image URL and the question you want to ask about the image.<br>
-   3.2 Click the button Ask Pythia.<br>
+   3.2 Click the button Ask Pythia!<br>
+   
 
 ![image](https://github.com/yueshuai0929/CS496-Project/blob/master/2.png)<br>
 
+
 3.3 You can view the image you upload in the window. Down below the predictions of the answer will show in descending order of confidence. <br>
+
 
 ![image](https://github.com/yueshuai0929/CS496-Project/blob/master/1.png)<br><br>
 
