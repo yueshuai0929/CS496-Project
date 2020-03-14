@@ -81,7 +81,9 @@ Here is the links to the pretrain models:
 [vqa2_train_val](https://dl.fbaipublicfiles.com/pythia/pretrained_models/vqa2/pythia_train_val.pth)  
 [vqa2_train_only](https://dl.fbaipublicfiles.com/pythia/pretrained_models/vqa2/pythia.pth)  
 [vizwiz](https://dl.fbaipublicfiles.com/pythia/pretrained_models/vizwiz/pythia_pretrained_vqa2.pth) 
-We are using vqa2_train_val pretrained model. Now to run inference for EvalAI, run the following command.  
+
+
+We are using [vqa2_train_val](https://dl.fbaipublicfiles.com/pythia/pretrained_models/vqa2/pythia_train_val.pth) pretrained model. Now to run inference for EvalAI, run the following command.  
 ```
 cd ~/pythia/data
 mkdir -p models && cd models;
