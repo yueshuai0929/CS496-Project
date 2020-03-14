@@ -128,10 +128,17 @@ docker pull
 nvidia-docker build pythia -t pythia:latest
 docker run --gpus 0 -it -p 8888:8888 pythia:latest
 ```
-The demo on jupyter notebook will kook like this:<br>
-![image](https://github.com/yueshuai0929/CS496-Project/blob/master/2.png)<br><br>
+The demo on jupyter notebook will look like this:<br>
+<br>
+![image](https://github.com/yueshuai0929/CS496-Project/blob/master/2.png)<br>
+
+
 And you will get the answers in a order based on the confidence of the prediction.<br>
+<br>
 ![image](https://github.com/yueshuai0929/CS496-Project/blob/master/1.png)<br><br>
+
+
+
 4. For your local device, you should run the commands to get the access to your Jupyter notebook.
 ```
 ssh -i thisIsmyKey.pem -L 8888:localhost:8888 ubuntu@ec2–34–227–222–100.compute-1.amazonaws.com
