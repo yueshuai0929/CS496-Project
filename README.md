@@ -134,7 +134,7 @@ The demo on jupyter notebook will look like this:<br>
 ![image](https://github.com/yueshuai0929/CS496-Project/blob/master/2.png)<br>
 
 
-And you will get the answers in a order based on the confidence of the prediction.<br>
+And you will get the answers in an order based on the confidence of the prediction.<br>
 <br>
 
 ![image](https://github.com/yueshuai0929/CS496-Project/blob/master/1.png)<br><br>
