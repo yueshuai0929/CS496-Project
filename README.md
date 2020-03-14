@@ -279,3 +279,6 @@ run command:
 nvidia-docker run pytorch-voice
 ```
 If you get a message says *Saved output as demo_output_00.wav*, then congratulations you run the demo successfully. Here we set the default target voice file as test.flac, and set the default text to clone as "The answer of the question is that there are three animals in the picture".  
+
+
+![image](https://github.com/yueshuai0929/CS496-Project/blob/master/demo_voice.PNG)
