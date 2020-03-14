@@ -1,7 +1,7 @@
-# Motivation<br>
-The Motication comes from the current vqa applications for visually impaired people. We want to implement a system in which users can upload a picture of the environment or a specific item and ask a question about it. The system is able to generate an answer and read out. Thus, basically our project can be divided into two parts: Visual Question Answering (VQA) and Vocie Cloning. 
+# Problem<br>
+The problem comes from the current vqa applications for visually impaired people. We want to implement a system in which users can upload a picture of the environment or a specific item and ask a question about it. The system is able to generate an answer and read out. Thus, basically our project can be divided into two parts: Visual Question Answering (VQA) and Vocie Cloning. 
 <br><br>
-# Models we use<br>
+# Solution<br>
 We use [Pythia](https://github.com/facebookresearch/pythia) as our model to complete the VQA task. <br>
 Pythia is a modular framework for Visual Question Answering research, which formed the basis for the winning entry to the VQA Challenge 2018 from Facebook AI Research (FAIR)s A-STAR team. It is built on top of PyTorch.<br><br>
 For Voice Cloning task, we use [Real-Time Voice Cloning](https://github.com/CorentinJ/Real-Time-Voice-Cloning) to read out the answer<br>
@@ -121,16 +121,25 @@ To quickly tryout a model interactively with [nvidia-docker](https://github.com/
 1. Download our pythia repository.
 2. Build the docker using Dockerfile in the folder `pythia`. Or you can pull our docker image from docker hub.
 ```bash
-docker pull 
+docker pull shuaiyue0929/pythia
 ```
 3. Run the docker `pythia:latest` to open a jupyter notebook with a demo model to which you can ask questions interactively.
 ```bash
 nvidia-docker build pythia -t pythia:latest
 docker run --gpus 0 -it -p 8888:8888 pythia:latest
 ```
-The demo on jupyter notebook will kook like this:
+The demo on jupyter notebook will look like this:<br>
+<br>
 
-And you will get the answers in a order based on the confidence of the prediction.
+![image](https://github.com/yueshuai0929/CS496-Project/blob/master/2.png)<br>
+
+
+And you will get the answers in a order based on the confidence of the prediction.<br>
+<br>
+
+![image](https://github.com/yueshuai0929/CS496-Project/blob/master/1.png)<br><br>
+
+
 
 4. For your local device, you should run the commands to get the access to your Jupyter notebook.
 ```
@@ -264,9 +273,17 @@ run command:
 ```
 nvidia-docker build -t pytorch-voice .
 ```
+
+Or you can pull the docker image from Docker hub.
+```
+docker pull shuaiyue0929/vc
+```
 5. Build a container to run the demo
 run command:
 ```
 nvidia-docker run pytorch-voice
 ```
 If you get a message says *Saved output as demo_output_00.wav*, then congratulations you run the demo successfully. Here we set the default target voice file as test.flac, and set the default text to clone as "The answer of the question is that there are three animals in the picture".  
+
+
+![image](https://github.com/yueshuai0929/CS496-Project/blob/master/demo_voice.PNG)
