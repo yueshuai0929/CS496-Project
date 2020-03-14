@@ -1,7 +1,7 @@
-# Motivation<br>
-The Motication comes from the current vqa applications for visually impaired people. We want to implement a system in which users can upload a picture of the environment or a specific item and ask a question about it. The system is able to generate an answer and read out. Thus, basically our project can be divided into two parts: Visual Question Answering (VQA) and Vocie Cloning. 
+# Problem<br>
+The problem comes from the current vqa applications for visually impaired people. We want to implement a system in which users can upload a picture of the environment or a specific item and ask a question about it. The system is able to generate an answer and read out. Thus, basically our project can be divided into two parts: Visual Question Answering (VQA) and Vocie Cloning. 
 <br><br>
-# Models we use<br>
+# Solution<br>
 We use [Pythia](https://github.com/facebookresearch/pythia) as our model to complete the VQA task. <br>
 Pythia is a modular framework for Visual Question Answering research, which formed the basis for the winning entry to the VQA Challenge 2018 from Facebook AI Research (FAIR)s A-STAR team. It is built on top of PyTorch.<br><br>
 For Voice Cloning task, we use [Real-Time Voice Cloning](https://github.com/CorentinJ/Real-Time-Voice-Cloning) to read out the answer<br>
