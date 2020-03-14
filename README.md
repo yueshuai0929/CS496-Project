@@ -160,7 +160,7 @@ The demo on jupyter notebook will look like this:<br>
 3.3 You can view the image you upload in the window. Down below the predictions of the answer will show in descending order of confidence. <br>
 
 
-![image](https://github.com/yueshuai0929/CS496-Project/blob/master/1-copy.png)<br><br>
+![image](https://github.com/yueshuai0929/CS496-Project/blob/master/1 - Copy.png)<br><br>
 
 
 
