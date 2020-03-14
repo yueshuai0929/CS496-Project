@@ -1,0 +1,361 @@
+2020-03-08T17:26:51 INFO: =====  Training Parameters    =====
+2020-03-08T17:26:51 INFO: {
+    "batch_size": 512,
+    "clip_gradients": true,
+    "clip_norm_mode": "all",
+    "data_parallel": false,
+    "device": "cpu",
+    "distributed": false,
+    "evalai_inference": true,
+    "experiment_name": "run",
+    "load_pretrained": false,
+    "local_rank": null,
+    "log_dir": "./logs",
+    "log_interval": 100,
+    "logger_level": "info",
+    "lr_ratio": 0.1,
+    "lr_scheduler": true,
+    "lr_steps": [
+        15000,
+        18000,
+        20000,
+        21000
+    ],
+    "max_epochs": null,
+    "max_grad_l2_norm": 0.25,
+    "max_iterations": 22000,
+    "metric_minimize": false,
+    "monitored_metric": "vqa_accuracy",
+    "num_workers": 7,
+    "patience": 4000,
+    "pin_memory": false,
+    "pretrained_mapping": {},
+    "resume": false,
+    "resume_file": "data/models/pythia_train_val.pth",
+    "run_type": "inference",
+    "save_dir": "./save",
+    "seed": null,
+    "should_early_stop": false,
+    "should_not_log": false,
+    "snapshot_interval": 1000,
+    "task_size_proportional_sampling": true,
+    "trainer": "base_trainer",
+    "use_warmup": true,
+    "verbose_dump": false,
+    "warmup_factor": 0.2,
+    "warmup_iterations": 1000
+}
+2020-03-08T17:26:51 INFO: ======  Task Attributes  ======
+2020-03-08T17:26:51 INFO: ======== vqa/vqa2 =======
+2020-03-08T17:26:51 INFO: {
+    "data_root_dir": "../data",
+    "fast_read": false,
+    "features_max_len": 100,
+    "image_depth_first": false,
+    "image_features": {
+        "test": [
+            "coco/detectron_fix_100/fc6/test2015,coco/resnet152/test2015"
+        ],
+        "train": [
+            "coco/detectron_fix_100/fc6/train_val_2014,coco/resnet152/train_val_2014",
+            "coco/detectron_fix_100/fc6/train_val_2014,coco/resnet152/train_val_2014"
+        ],
+        "val": [
+            "coco/detectron_fix_100/fc6/train_val_2014,coco/resnet152/train_val_2014"
+        ]
+    },
+    "imdb_files": {
+        "test": [
+            "imdb/vqa/imdb_test2015.npy"
+        ],
+        "train": [
+            "imdb/vqa/imdb_train2014.npy",
+            "imdb/vqa/imdb_val2014.npy"
+        ],
+        "val": [
+            "imdb/vqa/imdb_minival2014.npy"
+        ]
+    },
+    "processors": {
+        "answer_processor": {
+            "params": {
+                "num_answers": 10,
+                "preprocessor": {
+                    "params": {},
+                    "type": "simple_word"
+                },
+                "vocab_file": "vocabs/answers_vqa.txt"
+            },
+            "type": "vqa_answer"
+        },
+        "bbox_processor": {
+            "params": {
+                "max_length": 50
+            },
+            "type": "bbox"
+        },
+        "context_processor": {
+            "params": {
+                "max_length": 50,
+                "model_file": ".vector_cache/wiki.en.bin"
+            },
+            "type": "fasttext"
+        },
+        "ocr_token_processor": {
+            "params": {},
+            "type": "simple_word"
+        },
+        "text_processor": {
+            "params": {
+                "max_length": 14,
+                "preprocessor": {
+                    "params": {},
+                    "type": "simple_sentence"
+                },
+                "vocab": {
+                    "embedding_name": "glove.6B.300d",
+                    "type": "intersected",
+                    "vocab_file": "vocabs/vocabulary_100k.txt"
+                }
+            },
+            "type": "vocab"
+        }
+    },
+    "return_info": true,
+    "use_ocr": false,
+    "use_ocr_info": false
+}
+2020-03-08T17:26:51 INFO: ======  Optimizer Attributes  ======
+2020-03-08T17:26:51 INFO: {
+    "params": {
+        "eps": 1e-08,
+        "lr": 0.01,
+        "weight_decay": 0
+    },
+    "type": "Adamax"
+}
+2020-03-08T17:26:51 INFO: ======  Model (pythia) Attributes  ======
+2020-03-08T17:26:51 INFO: {
+    "classifier": {
+        "params": {
+            "img_hidden_dim": 5000,
+            "text_hidden_dim": 300
+        },
+        "type": "logit"
+    },
+    "image_feature_dim": 2048,
+    "image_feature_embeddings": [
+        {
+            "modal_combine": {
+                "params": {
+                    "dropout": 0,
+                    "hidden_dim": 5000
+                },
+                "type": "non_linear_element_multiply"
+            },
+            "normalization": "softmax",
+            "transform": {
+                "params": {
+                    "out_dim": 1
+                },
+                "type": "linear"
+            }
+        }
+    ],
+    "image_feature_encodings": [
+        {
+            "params": {
+                "bias_file": "detectron/fc6/fc7_b.pkl",
+                "weights_file": "detectron/fc6/fc7_w.pkl"
+            },
+            "type": "finetune_faster_rcnn_fpn_fc7"
+        },
+        {
+            "params": {},
+            "type": "default"
+        }
+    ],
+    "image_text_modal_combine": {
+        "params": {
+            "dropout": 0,
+            "hidden_dim": 5000
+        },
+        "type": "non_linear_element_multiply"
+    },
+    "losses": [
+        {
+            "type": "logit_bce"
+        }
+    ],
+    "metrics": [
+        {
+            "type": "vqa_accuracy"
+        }
+    ],
+    "model_data_dir": "../data/",
+    "text_embeddings": [
+        {
+            "params": {
+                "conv1_out": 512,
+                "conv2_out": 2,
+                "dropout": 0,
+                "embedding_dim": 300,
+                "hidden_dim": 1024,
+                "kernel_size": 1,
+                "num_layers": 1,
+                "padding": 0
+            },
+            "type": "attention"
+        }
+    ]
+}
+2020-03-08T17:26:51 INFO: Loading tasks and data
+2020-03-08T17:34:49 INFO: Torch version is: 1.0.1.post2
+2020-03-08T17:34:49 INFO: Loading checkpoint
+2020-03-08T17:34:51 WARNING: /home/ubuntu/pythia/pythia/utils/checkpoint.py:120: UserWarning: 'optimizer' key is not present in the checkpoint asked to be loaded. Skipping.
+  "'optimizer' key is not present in the "
+
+2020-03-08T17:34:51 INFO: Checkpoint loaded
+2020-03-08T17:34:51 INFO: ===== Model =====
+2020-03-08T17:34:51 INFO: Pythia(
+  (word_embedding): Embedding(75505, 300)
+  (text_embeddings): ModuleList(
+    (0): TextEmbedding(
+      (module): AttentionTextEmbedding(
+        (recurrent_unit): LSTM(300, 1024, batch_first=True)
+        (dropout): Dropout(p=0)
+        (conv1): Conv1d(1024, 512, kernel_size=(1,), stride=(1,))
+        (conv2): Conv1d(512, 2, kernel_size=(1,), stride=(1,))
+        (relu): ReLU()
+      )
+    )
+  )
+  (image_feature_encoders): ModuleList(
+    (0): ImageEncoder(
+      (module): FinetuneFasterRcnnFpnFc7(
+        (lc): Linear(in_features=2048, out_features=2048, bias=True)
+      )
+    )
+    (1): ImageEncoder(
+      (module): Identity()
+    )
+  )
+  (image_feature_embeddings_list): ModuleList(
+    (0): ModuleList(
+      (0): ImageEmbedding(
+        (image_attention_model): AttentionLayer(
+          (module): TopDownAttention(
+            (combination_layer): ModalCombineLayer(
+              (module): NonLinearElementMultiply(
+                (fa_image): ReLUWithWeightNormFC(
+                  (layers): Sequential(
+                    (0): Linear(in_features=2048, out_features=5000, bias=True)
+                    (1): ReLU()
+                  )
+                )
+                (fa_txt): ReLUWithWeightNormFC(
+                  (layers): Sequential(
+                    (0): Linear(in_features=2048, out_features=5000, bias=True)
+                    (1): ReLU()
+                  )
+                )
+                (fa_context): ReLUWithWeightNormFC(
+                  (layers): Sequential(
+                    (0): Linear(in_features=2048, out_features=5000, bias=True)
+                    (1): ReLU()
+                  )
+                )
+                (dropout): Dropout(p=0)
+              )
+            )
+            (transform): TransformLayer(
+              (module): LinearTransform(
+                (lc): Linear(in_features=5000, out_features=1, bias=True)
+              )
+            )
+          )
+        )
+      )
+    )
+    (1): ModuleList(
+      (0): ImageEmbedding(
+        (image_attention_model): AttentionLayer(
+          (module): TopDownAttention(
+            (combination_layer): ModalCombineLayer(
+              (module): NonLinearElementMultiply(
+                (fa_image): ReLUWithWeightNormFC(
+                  (layers): Sequential(
+                    (0): Linear(in_features=2048, out_features=5000, bias=True)
+                    (1): ReLU()
+                  )
+                )
+                (fa_txt): ReLUWithWeightNormFC(
+                  (layers): Sequential(
+                    (0): Linear(in_features=2048, out_features=5000, bias=True)
+                    (1): ReLU()
+                  )
+                )
+                (fa_context): ReLUWithWeightNormFC(
+                  (layers): Sequential(
+                    (0): Linear(in_features=2048, out_features=5000, bias=True)
+                    (1): ReLU()
+                  )
+                )
+                (dropout): Dropout(p=0)
+              )
+            )
+            (transform): TransformLayer(
+              (module): LinearTransform(
+                (lc): Linear(in_features=5000, out_features=1, bias=True)
+              )
+            )
+          )
+        )
+      )
+    )
+  )
+  (image_text_multi_modal_combine_layer): ModalCombineLayer(
+    (module): NonLinearElementMultiply(
+      (fa_image): ReLUWithWeightNormFC(
+        (layers): Sequential(
+          (0): Linear(in_features=4096, out_features=5000, bias=True)
+          (1): ReLU()
+        )
+      )
+      (fa_txt): ReLUWithWeightNormFC(
+        (layers): Sequential(
+          (0): Linear(in_features=2048, out_features=5000, bias=True)
+          (1): ReLU()
+        )
+      )
+      (fa_context): ReLUWithWeightNormFC(
+        (layers): Sequential(
+          (0): Linear(in_features=2048, out_features=5000, bias=True)
+          (1): ReLU()
+        )
+      )
+      (dropout): Dropout(p=0)
+    )
+  )
+  (classifier): ClassifierLayer(
+    (module): LogitClassifier(
+      (f_o_text): ReLUWithWeightNormFC(
+        (layers): Sequential(
+          (0): Linear(in_features=5000, out_features=300, bias=True)
+          (1): ReLU()
+        )
+      )
+      (f_o_image): ReLUWithWeightNormFC(
+        (layers): Sequential(
+          (0): Linear(in_features=5000, out_features=5000, bias=True)
+          (1): ReLU()
+        )
+      )
+      (linear_text): Linear(in_features=300, out_features=3129, bias=True)
+      (linear_image): Linear(in_features=5000, out_features=3129, bias=True)
+    )
+  )
+  (losses): Losses()
+)
+2020-03-08T17:34:51 INFO: Starting test inference for evalai
+2020-03-08T17:34:51 INFO: Predicting for vqa2
