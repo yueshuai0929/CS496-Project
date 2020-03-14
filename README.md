@@ -121,7 +121,7 @@ To quickly tryout a model interactively with [nvidia-docker](https://github.com/
 1. Download our pythia repository.
 2. Build the docker using Dockerfile in the folder `pythia`. Or you can pull our docker image from docker hub.
 ```bash
-docker pull 
+docker pull valerie/pythia
 ```
 3. Run the docker `pythia:latest` to open a jupyter notebook with a demo model to which you can ask questions interactively.
 ```bash
