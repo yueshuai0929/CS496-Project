@@ -10,6 +10,6 @@ PyYAML>=3.11
 pytest==5.2.0
 requests==2.21.0
 fastText
-nltk==3.4.5
+nltk==3.6.6
 transformers>=2.0.0
 block.bootstrap.pytorch==0.1.6
